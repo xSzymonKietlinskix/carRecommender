@@ -1,8 +1,9 @@
 /* style.css */
 
 body, html {
-    background-color: LavenderBlush;
-    color: black;
+    /*background-color: MistyRose;*/
+    background-image: linear-gradient(MistyRose, LavenderBlush, MistyRose);
+    color: MistyRose;
     height: 100%;
     margin: 0;
     display: flex;
@@ -10,6 +11,7 @@ body, html {
     align-items: center;
     justify-content: center;
     font-size: 100%;
+    font-family: "DM Sans", sans-serif;
 }
 .container{
     width: 100%;
@@ -18,11 +20,12 @@ body, html {
 
 .button {
   display: inline-block;
-  border-radius: 2px;
-  background-color: LavenderBlush;
-  color: DodgerBlue;
+  border-radius: 4px;
+  border-color: MistyRose;
+  background-color: CadetBlue;
+  color: MistyRose;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 1em;
   transition: all 0.5s;
   cursor: pointer;
 }
@@ -53,15 +56,51 @@ body, html {
 }
 
 .form-box {
-    background-color: DodgerBlue;
-    color: white;
+    /*background-color: CadetBlue;*/
+    background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);
+
     padding: 20px;
     border-radius: 10px;
-    font-family: "DM Sans", sans-serif;
+    box-shadow: 10px 5px 5px LightSlateGrey;
+
     & h1 {
-        font-size:1em;
+        font-size:1.1em;
     }
     & h2 {
-        font-size:0.5em;
+        font-size:0.7em;
     }
+}
+
+.navbar{
+    /*background-color: CadetBlue;*/
+    background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align: justify;
+    display: flex;
+    justify-content: space-between;
+    & a {
+        margin-bottom: 1px;
+        margin-top: 1px;
+        margin-left: 10px;
+        margin-right: 10px;
+        text-decoration: none;
+        color: MistyRose
+    }
+}
+
+option,select{
+    background-color: CadetBlue;
+    color: MistyRose;
+}
+
+input{
+    background-color: CadetBlue;
+    color: MistyRose;
+    border-radius: 4px;
+    border-color: MistyRose;
+    margin-top: 10px;
 }

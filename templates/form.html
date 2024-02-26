@@ -1,0 +1,57 @@
+<!-- templates/form.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car recommender</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Aplikacja do rekomendacji samochodów</a>
+        <a href="/about">O projekcie</a>
+    </div>
+    <div class="container">
+        <div class="form-box">
+            <h1> Formularz preferencji</h1>
+            <form action="/ankieta" method="post">
+                <label for="przeznaczenie">Przeznaczenie pojazdu</label>
+                <select name="przeznaczenie" id="przeznaczenie">
+                    <option value="Rodzinny">Rodzinny</option>
+                    <option value="Dostawczy">Dostawczy</option>
+                    <option value="Dojazdy do pracy">Dojazdy do pracy</option>
+                    <option value="Długie trasy">Długie trasy</option>
+                    <option value="Sportowy">Sportowy</option>
+                </select>
+                <label for="ekonomia">Jak ważna jest dla Ciebie ekonomia pojazdu?</label>
+                <select name="ekonomia" id="ekonomia">
+                    <option value="mało">Mało</option>
+                    <option value="średnio">Średnio</option>
+                    <option value="bardzo">Bardzo</option>
+                    <option value="nie wiem">Nie wiem</option>
+                </select>
+                <label for="wygoda">Jak wygodnego pojazdu oczekujesz?</label>
+                <select name="wygoda" id="wygoda">
+                    <option value="mało">Mało</option>
+                    <option value="średnio">Średnio</option>
+                    <option value="bardzo">Bardzo</option>
+                    <option value="nie wiem">Nie wiem</option>
+                </select>
+                <label for="styl_jazdy">Jaki masz styl jazdy?</label>
+                <select name="styl_jazdy" id="styl_jazdy">
+                    <option value="mało">Mało</option>
+                </select>
+                <br>
+                <input type="submit" name="action" value="Dalej">
+            </form>
+<!--            <a href="/ankieta">-->
+<!--                <button class="button" id="dalej" ><span>Dalej </span></button>-->
+<!--            </a>-->
+        </div>
+    </div>
+</body>
+</html>

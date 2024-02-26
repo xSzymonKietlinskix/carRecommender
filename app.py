@@ -9,16 +9,19 @@ app.config.from_pyfile('config.py')
 def index():
     return render_template('homepage.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 @app.route('/ankieta', methods=['GET', 'POST'])
 def ankieta():
-
     if request.method == 'POST':
-        opcja_wybrana = request.form['opcje']
+        opcja_wybrana = request.form['przeznaczenie']
         if request.form['action'] == 'Dalej':
             print("Wybrana opcja: ", opcja_wybrana)
             return redirect(url_for('kolejny_krok'))
-    return render_template('form1step.html')
+    return render_template('form.html')
 
 
 @app.route('/kolejny_krok')
