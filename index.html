@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prosty formularz</title>
+</head>
+<body>
+    <h1>Proste pytanie:</h1>
+    <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        {{ form.question.label }} <br>
+        {{ form.question }} <br>
+        {{ form.submit }}
+    </form>
+</body>
+</html>

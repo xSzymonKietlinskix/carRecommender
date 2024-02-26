@@ -1,0 +1,67 @@
+/* style.css */
+
+body, html {
+    background-color: LavenderBlush;
+    color: black;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 100%;
+}
+.container{
+    width: 100%;
+    text-align: center;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: LavenderBlush;
+  color: DodgerBlue;
+  text-align: center;
+  font-size: 0.8em;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.button span {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.form-box {
+    background-color: DodgerBlue;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: "DM Sans", sans-serif;
+    & h1 {
+        font-size:1em;
+    }
+    & h2 {
+        font-size:0.5em;
+    }
+}
