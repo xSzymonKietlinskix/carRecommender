@@ -1,0 +1,58 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1  .0">
+    <title>Car recommender</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Aplikacja do rekomendacji samochodów</a>
+        <a href="/about">O projekcie</a>
+    </div>
+    <div class="results-container">
+        <div class="form-box">
+            <h1>Wybrane parametry:</h1>
+            <p>Przeznaczenie: {{ user.przeznaczenie }}</p>
+            <p>Ekonomia: {{ user.ekonomia }}</p>
+            <p>Wygoda: {{ user.wygoda }}</p>
+            <p>Styl jazdy: {{ user.styl_jazdy }}</p>
+        </div>
+        <div class="form-box">
+            <h1>Rekomendowany pojazd:</h1>
+            <p> Tu będzie pojazd</p>
+        </div>
+        <div class="form-box">
+            <h1>Oceń rekomendację:</h1>
+            <div class="rating">
+                <span><i class="far fa-star"></i></span>
+                <span><i class="far fa-star"></i></span>
+                <span><i class="far fa-star"></i></span>
+                <span><i class="far fa-star"></i></span>
+                <span><i class="far fa-star"></i></span>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+            $(document).ready(function(){
+                $('.rating > span').click(function(){
+                    var rating = 5 - ($(this).index());
+                    // Tutaj możesz przekazać wartość oceny do serwera za pomocą AJAX lub przetworzyć ją w dowolny inny sposób
+                    console.log('Ocena: ' + rating);
+                    $.ajax({
+                        url: '/submit-rating',
+                        type: 'POST',
+                        data: { rating: rating },
+                    });
+                });
+            }); 
+            </script>
+        </div>
+    </div>
+</body>
+</html>

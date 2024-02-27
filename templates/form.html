@@ -18,7 +18,7 @@
     <div class="container">
         <div class="form-box">
             <h1> Formularz preferencji</h1>
-            <form action="/ankieta" method="post">
+            <form action="/form" method="post">
                 <label for="przeznaczenie">Przeznaczenie pojazdu</label>
                 <select name="przeznaczenie" id="przeznaczenie">
                     <option value="Rodzinny">Rodzinny</option>
@@ -27,6 +27,7 @@
                     <option value="Długie trasy">Długie trasy</option>
                     <option value="Sportowy">Sportowy</option>
                 </select>
+                <br>
                 <label for="ekonomia">Jak ważna jest dla Ciebie ekonomia pojazdu?</label>
                 <select name="ekonomia" id="ekonomia">
                     <option value="mało">Mało</option>
@@ -34,6 +35,7 @@
                     <option value="bardzo">Bardzo</option>
                     <option value="nie wiem">Nie wiem</option>
                 </select>
+                <br>
                 <label for="wygoda">Jak wygodnego pojazdu oczekujesz?</label>
                 <select name="wygoda" id="wygoda">
                     <option value="mało">Mało</option>
@@ -41,9 +43,12 @@
                     <option value="bardzo">Bardzo</option>
                     <option value="nie wiem">Nie wiem</option>
                 </select>
+                <br>
                 <label for="styl_jazdy">Jaki masz styl jazdy?</label>
                 <select name="styl_jazdy" id="styl_jazdy">
-                    <option value="mało">Mało</option>
+                    <option value="defensywny">Defensywny</option>
+                    <option value="agresywny">Defensywny</option>
+                    <option value="neutralny">Defensywny</option>
                 </select>
                 <br>
                 <input type="submit" name="action" value="Dalej">
