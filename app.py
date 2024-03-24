@@ -1,6 +1,7 @@
 # app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from user import User
+import recommender
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -31,6 +32,7 @@ def form():
                 'wygoda': wygoda,
                 'styl_jazdy': styl_jazdy
             }
+            recommender.recommend(user)
             return redirect(url_for('results'))
     return render_template('form.html')
 
