@@ -1,9 +1,27 @@
+import csv
+import pandas as pd
+
+
 class DecodedUser:
     def __init__(self, economy, comfort, driving_style, purpose):
         self.purpose = purpose
         self.driving_style = driving_style
         self.comfort = comfort
         self.economy = economy
+
+    def save_user(self, car_id, rating):
+        try:
+            users = pd.read_csv('users.csv', sep=';')
+            id = users.iloc[-1, 0]
+        except:
+            id = 0
+
+        finally:
+            with open('users.csv', 'a', encoding='UTF8', newline='') as f:
+                writer = csv.writer(f)
+                row = str(id) + ';' + str(self.purpose) + ';' + str(self.economy) + ';' + str(self.comfort) + ';' + str(
+                    self.driving_style) + ';' + str(car_id) + ';' + str(rating)
+                writer.writerow([row])
 
 
 class User:
@@ -14,14 +32,14 @@ class User:
         self.przeznaczenie = przeznaczenie
 
     def decode(self):
-        przeznaczenie_dict ={
+        przeznaczenie_dict = {
             'Rodzinny': ['D', 'E', 'K'],
             'Miejski': ['A', 'B', 'C'],
             'Uniwersalny': ['C', 'D', 'E'],
             'Trasy': ['D', 'E', 'F', 'K'],
             'Sportowy': ['G'],
         }
-        styl_jazdy_dict ={
+        styl_jazdy_dict = {
             'defensywny': -1,
             'agresywny': 1,
             'neutralny': 0,
