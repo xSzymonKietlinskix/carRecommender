@@ -1,8 +1,8 @@
 /* style.css */
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
 body, html {
     /*background-color: MistyRose;*/
-    background-image: linear-gradient(MistyRose, LavenderBlush, MistyRose);
+    /*background-image: linear-gradient(MistyRose, LavenderBlush, MistyRose);*/
     color: MistyRose;
     height: 100%;
     margin: 0;
@@ -10,9 +10,16 @@ body, html {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    font-size: 100%;
-    font-family: "DM Sans", sans-serif;
+    font-size: 110%;
+    /*font-family: "DM Sans", sans-serif;*/
+    font-family: 'Montserrat',sans-serif;
 }
+
+body{
+    background-image: url('background.jpg');
+    background-size: cover;
+}
+
 .container{
     width: 100%;
     text-align: center;
@@ -21,8 +28,8 @@ body, html {
 .button {
   display: inline-block;
   border-radius: 4px;
-  border-color: MistyRose;
-  background-color: CadetBlue;
+  border-color: Black;
+  background-color: rgb(0 0 0 / 30%);
   color: MistyRose;
   text-align: center;
   font-size: 1em;
@@ -56,25 +63,31 @@ body, html {
 }
 
 .form-box {
-    /*background-color: CadetBlue;*/
-    background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);
-
+    background-color: rgb(0 0 0 / 30%);
+    /*background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);*/
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 10px 5px 5px LightSlateGrey;
+    box-shadow: 5px 2px 2px Black;
     margin-right: auto;
     margin-left: auto;
+    position: relative;
+    backdrop-filter: blur(10px);
     & h1 {
+        opacity: 100%;
         font-size:1.1em;
     }
     & h2 {
+        opacity: 100%;
         font-size:0.7em;
     }
 }
 
+
 .navbar{
     /*background-color: CadetBlue;*/
-    background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);
+    /*background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);*/
+    background-color: rgb(0 0 0 / 30%);
+    backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     left: 0;
@@ -95,12 +108,37 @@ body, html {
 }
 
 option,select{
-    background-color: CadetBlue;
+    background-color: Black;
     color: MistyRose;
 }
 
+option{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: rgb(0 0 0 / 30%);
+}
+
+.option input[type="radio"] {
+    display: none;
+}
+
+.option input[type="radio"]:checked + label {
+    font-weight: bold;
+}
+
+
+.option:active {
+    background-color: rgb(0 0 0 / 30%);
+}
+
 input{
-    background-color: CadetBlue;
+    background-color: Black;
     color: MistyRose;
     border-radius: 4px;
     border-color: MistyRose;

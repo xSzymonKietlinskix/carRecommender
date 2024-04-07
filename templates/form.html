@@ -19,41 +19,91 @@
         <div class="form-box">
             <h1> Formularz preferencji</h1>
             <form action="/form" method="post">
-                <label for="przeznaczenie">Przeznaczenie pojazdu</label>
-                <select name="przeznaczenie" id="przeznaczenie">
-                    <option value="Rodzinny">Rodzinny</option>
-                    <option value="Miejski">Miejski, na codzień</option>
-                    <option value="Uniwersalny">Uniwersalny</option>
-                    <option value="Trasy">Długie trasy</option>
-                    <option value="Sportowy">Sportowy</option>
-                </select>
-                <br>
-                <label for="ekonomia">Jak ważna jest dla Ciebie ekonomia pojazdu?</label>
-                <select name="ekonomia" id="ekonomia">
-                    <option value="mało">Mało</option>
-                    <option value="średnio">Średnio</option>
-                    <option value="bardzo">Bardzo</option>
-                </select>
-                <br>
-                <label for="wygoda">Jak wygodnego pojazdu oczekujesz?</label>
-                <select name="wygoda" id="wygoda">
-                    <option value="mało">Mało</option>
-                    <option value="średnio">Średnio</option>
-                    <option value="bardzo">Bardzo</option>
-                </select>
-                <br>
-                <label for="styl_jazdy">Jaki masz styl jazdy?</label>
-                <select name="styl_jazdy" id="styl_jazdy">
-                    <option value="defensywny">Defensywny</option>
-                    <option value="agresywny">Agresywny</option>
-                    <option value="neutralny">Neutralny</option>
-                </select>
-                <br>
-                <input type="submit" name="action" value="Dalej">
-            </form>
-<!--            <a href="/ankieta">-->
-<!--                <button class="button" id="dalej" ><span>Dalej </span></button>-->
-<!--            </a>-->
+            <fieldset>
+                <legend>Przeznaczenie pojazdu</legend>
+                <div class="option" id="rodzinny">
+                    <input type="radio" name="przeznaczenie" value="Rodzinny" id="przeznaczenie_rodzinny">
+                    <label for="przeznaczenie_rodzinny">Rodzinny</label>
+                </div>
+
+                <div class="option" id="miejski">
+                    <input type="radio" name="przeznaczenie" value="Miejski" id="przeznaczenie_miejski">
+                    <label for="przeznaczenie_miejski">Miejski, na codzień</label>
+                </div>
+
+                <div class="option" id="uniwersalny">
+                    <input type="radio" name="przeznaczenie" value="Uniwersalny" id="przeznaczenie_uniwersalny">
+                    <label for="przeznaczenie_uniwersalny">Uniwersalny</label>
+                </div>
+
+                <div class="option" id="trasy">
+                    <input type="radio" name="przeznaczenie" value="Trasy" id="przeznaczenie_trasy">
+                    <label for="przeznaczenie_trasy">Długie trasy</label>
+                </div>
+
+                <div class="option" id="sportowy">
+                    <input type="radio" name="przeznaczenie" value="Sportowy" id="przeznaczenie_sportowy">
+                    <label for="przeznaczenie_sportowy">Sportowy</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Jak ważna jest dla Ciebie ekonomia pojazdu?</legend>
+                <div class="option" id="ekonomia_malo">
+                    <input type="radio" name="ekonomia" value="mało" id="ekonomia_malo_input">
+                    <label for="ekonomia_malo_input">Mało</label>
+                </div>
+
+                <div class="option" id="ekonomia_srednio">
+                    <input type="radio" name="ekonomia" value="średnio" id="ekonomia_srednio_input">
+                    <label for="ekonomia_srednio_input">Średnio</label>
+                </div>
+
+                <div class="option" id="ekonomia_bardzo">
+                    <input type="radio" name="ekonomia" value="bardzo" id="ekonomia_bardzo_input">
+                    <label for="ekonomia_bardzo_input">Bardzo</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Jak wygodnego pojazdu oczekujesz?</legend>
+                <div class="option" id="wygoda_malo">
+                    <input type="radio" name="wygoda" value="mało" id="wygoda_malo_input">
+                    <label for="wygoda_malo_input">Mało</label>
+                </div>
+
+                <div class="option" id="wygoda_srednio">
+                    <input type="radio" name="wygoda" value="średnio" id="wygoda_srednio_input">
+                    <label for="wygoda_srednio_input">Średnio</label>
+                </div>
+
+                <div class="option" id="wygoda_bardzo">
+                    <input type="radio" name="wygoda" value="bardzo" id="wygoda_bardzo_input">
+                    <label for="wygoda_bardzo_input">Bardzo</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Jaki masz styl jazdy?</legend>
+                <div class="option" id="styl_jazdy_defensywny">
+                    <input type="radio" name="styl_jazdy" value="defensywny" id="styl_jazdy_defensywny_input">
+                    <label for="styl_jazdy_defensywny_input">Defensywny</label>
+                </div>
+
+                <div class="option" id="styl_jazdy_agresywny">
+                    <input type="radio" name="styl_jazdy" value="agresywny" id="styl_jazdy_agresywny_input">
+                    <label for="styl_jazdy_agresywny_input">Agresywny</label>
+                </div>
+
+                <div class="option" id="styl_jazdy_neutralny">
+                    <input type="radio" name="styl_jazdy" value="neutralny" id="styl_jazdy_neutralny_input">
+                    <label for="styl_jazdy_neutralny_input">Neutralny</label>
+                </div>
+            </fieldset>
+
+            <input type="submit" name="action" value="Dalej" class="button">
+        </form>
+
         </div>
     </div>
 </body>
