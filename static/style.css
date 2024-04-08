@@ -16,20 +16,22 @@ body, html {
 }
 
 body{
-    background-image: url('background.jpg');
+    background-image: url('background.svg');
     background-size: cover;
 }
 
 .container{
     width: 100%;
     text-align: center;
+    display: flex;
+
 }
 
 .button {
   display: inline-block;
-  border-radius: 4px;
-  border-color: Black;
-  background-color: rgb(0 0 0 / 30%);
+  /*border-radius: 4px;*/
+  /*border-color: Black;*/
+  background-color: rgb(0 0 0 / 20%);
   color: MistyRose;
   text-align: center;
   font-size: 1em;
@@ -62,11 +64,21 @@ body{
   right: 0;
 }
 
+
+.left-bar {
+    background-color: rgb(0 0 0 / 100%);
+    border-radius: 10px 0 0 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 2px 2px Black;
+    border-right: 2px solid black;
+    font-size: 60%;
+}
+
 .form-box {
     background-color: rgb(0 0 0 / 30%);
     /*background-image: linear-gradient(to bottom right, LightSeaGreen, CadetBlue);*/
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 10px 10px 10px 10px;
     box-shadow: 5px 2px 2px Black;
     margin-right: auto;
     margin-left: auto;
