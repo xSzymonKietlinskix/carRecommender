@@ -1,6 +1,7 @@
 # app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from user import User
+from car import Car
 import recommender
 
 app = Flask(__name__)
@@ -23,16 +24,27 @@ def form():
         przeznaczenie = request.form['przeznaczenie']
         ekonomia = request.form['ekonomia']
         wygoda = request.form['wygoda']
+        min_price = request.form['min-price']
+        max_price = request.form['max-price']
         styl_jazdy = request.form['styl_jazdy']
         if request.form['action'] == 'Dalej':
-            user = User(przeznaczenie, ekonomia, wygoda, styl_jazdy)
+            user = User(przeznaczenie, ekonomia, wygoda, styl_jazdy, min_price, max_price)
             session['user'] = {
                 'przeznaczenie': przeznaczenie,
                 'ekonomia': ekonomia,
                 'wygoda': wygoda,
-                'styl_jazdy': styl_jazdy
+                'styl_jazdy': styl_jazdy,
+                'min_price': min_price,
+                'max_price': max_price
             }
-            recommender.recommend(user)
+            car = recommender.recommend(user)
+            session['car'] = {
+                'brand': car.brand,
+                'model': car.model,
+                'generation': car.generation,
+                'version': car.version,
+                'id': car.id
+            }
             return redirect(url_for('results'))
     return render_template('form.html')
 
@@ -40,16 +52,25 @@ def form():
 @app.route('/results')
 def results():
     user_data = session.get('user')
+    car_data = session.get('car')
     if user_data:
-        user = User(user_data['przeznaczenie'], user_data['ekonomia'], user_data['wygoda'], user_data['styl_jazdy'])
-        return render_template('results.html', user=user)
+        car = Car(brand=car_data['brand'], model=car_data['model'], generation=car_data['generation'], version=car_data['version'])
+        user = User(user_data['przeznaczenie'], user_data['ekonomia'], user_data['wygoda'], user_data['styl_jazdy'], user_data['min_price'], user_data['max_price'])
+        return render_template('results.html', user=user, car=car)
     else:
-        return "Brak danych użytkownika"
+        return "Brak danych użytkownika lub pojazdu"
 
 @app.route('/submit-rating', methods=['POST'])
 def submit_rating():
     rating = request.form.get('rating')
-    print("Ocena: ", rating)
+    user_data = session.get('user')
+    car_data = session.get('car')
+    if user_data:
+        user = User(user_data['przeznaczenie'], user_data['ekonomia'], user_data['wygoda'], user_data['styl_jazdy'], user_data['min_price'], user_data['max_price'])
+        car = Car(id = car_data['id'], brand=car_data['brand'], model=car_data['model'], generation=car_data['generation'],
+                  version=car_data['version'])
+        dec_user = user.decode()
+        dec_user.save_user_rating(car.id, rating)
     return redirect(url_for('results'))
 
 

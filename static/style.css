@@ -10,7 +10,7 @@ body, html {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    font-size: 110%;
+    font-size: 105%;
     /*font-family: "DM Sans", sans-serif;*/
     font-family: 'Montserrat',sans-serif;
 }
@@ -142,6 +142,7 @@ option{
 
 .option input[type="radio"]:checked + label {
     font-weight: bold;
+    color: #CD6B8E;
 }
 
 
@@ -189,4 +190,8 @@ input{
     /*margin-bottom: 4px;*/
     margin-top: -3.69px;
     font-size: 1.2em;
+}
+
+input[type=number]{
+    background-color: transparent;
 }

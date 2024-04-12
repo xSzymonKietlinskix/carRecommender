@@ -3,33 +3,36 @@ import pandas as pd
 
 
 class DecodedUser:
-    def __init__(self, economy, comfort, driving_style, purpose):
+    def __init__(self,  economy, comfort, driving_style, purpose, min_price, max_price, id_usr=0, purpose_str=""):
+        self.purpose_str = purpose_str
+        self.max_price = float(max_price)
+        self.min_price = float(min_price)
+        self.id_usr = id_usr
         self.purpose = purpose
         self.driving_style = driving_style
         self.comfort = comfort
         self.economy = economy
 
-    def save_user(self, car_id, rating):
-        try:
-            users = pd.read_csv('users.csv', sep=';')
-            id = users.iloc[-1, 0]
-        except:
-            id = 0
 
-        finally:
-            with open('users.csv', 'a', encoding='UTF8', newline='') as f:
-                writer = csv.writer(f)
-                row = str(id) + ';' + str(self.purpose) + ';' + str(self.economy) + ';' + str(self.comfort) + ';' + str(
-                    self.driving_style) + ';' + str(car_id) + ';' + str(rating)
-                writer.writerow([row])
+    def save_user_rating(self, car_id, rating):
+        with open('users_ratings.csv', 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+            row = str(self.id_usr) + ';' + str(car_id) + ';' + str(rating)
+            writer.writerow([row])
+
+    def values(self):
+        return self.purpose_str, self.economy, self.comfort, self.min_price, self.max_price
 
 
 class User:
-    def __init__(self, przeznaczenie, ekonomia, wygoda, styl_jazdy):
+    def __init__(self, przeznaczenie, ekonomia, wygoda, styl_jazdy, min_price, max_price):
+        self.max_price = max_price
+        self.min_price = min_price
         self.styl_jazdy = styl_jazdy
         self.wygoda = wygoda
         self.ekonomia = ekonomia
         self.przeznaczenie = przeznaczenie
+
 
     def decode(self):
         przeznaczenie_dict = {
@@ -76,5 +79,16 @@ class User:
                 mapped_przeznaczenie = mapped_przeznaczenie[len(mapped_przeznaczenie) // 2]
                 mapped_przeznaczenie = list(mapped_przeznaczenie)
 
-        dec_user = DecodedUser(economy, comfort, driving_style, mapped_przeznaczenie)
+        with open('users.csv', 'r', encoding='utf-8') as file:
+            id_usr = sum(1 for line in file)
+            print("Liczba wierszy w pliku:", id_usr)
+
+            self.id_usr = id_usr
+            with open('users.csv', 'a', encoding='UTF8', newline='') as f:
+                writer = csv.writer(f)
+                row = str(id_usr) + ';' + str(self.przeznaczenie) + ';' + str(economy) + ';' + str(comfort) + ';' + str(
+                    driving_style) + ';' + str(self.min_price) + ';' + str(self.max_price)
+                writer.writerow([row])
+
+        dec_user = DecodedUser(economy, comfort, driving_style, mapped_przeznaczenie, self.min_price, self.max_price, id_usr, self.przeznaczenie)
         return dec_user

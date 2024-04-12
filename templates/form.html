@@ -48,7 +48,7 @@
             </fieldset>
 
             <fieldset>
-                <legend>Jak ważna jest dla Ciebie ekonomia pojazdu?</legend>
+                <legend>Ekonomia</legend>
                 <div class="option" id="ekonomia_malo">
                     <input type="radio" name="ekonomia" value="mało" id="ekonomia_malo_input" required>
                     <label for="ekonomia_malo_input">Mało</label>
@@ -66,7 +66,7 @@
             </fieldset>
 
             <fieldset>
-                <legend>Jak wygodnego pojazdu oczekujesz?</legend>
+                <legend>Wygoda</legend>
                 <div class="option" id="wygoda_malo">
                     <input type="radio" name="wygoda" value="mało" id="wygoda_malo_input" required>
                     <label for="wygoda_malo_input">Mało</label>
@@ -84,7 +84,7 @@
             </fieldset>
 
             <fieldset>
-                <legend>Jaki masz styl jazdy?</legend>
+                <legend>Styl jazdy</legend>
                 <div class="option" id="styl_jazdy_defensywny">
                     <input type="radio" name="styl_jazdy" value="defensywny" id="styl_jazdy_defensywny_input" required>
                     <label for="styl_jazdy_defensywny_input">Defensywny</label>
@@ -99,6 +99,13 @@
                     <input type="radio" name="styl_jazdy" value="neutralny" id="styl_jazdy_neutralny_input" required>
                     <label for="styl_jazdy_neutralny_input">Neutralny</label>
                 </div>
+            </fieldset>
+            <fieldset>
+                <legend>Budżet</legend>
+<!--               <label for="min-price">Od:</label>-->
+                <input type="number" id="min-price" name="min-price" min="0" placeholder="Od:" required value="0">
+<!--                <label for="max-price">Do:</label>-->
+                <input type="number" id="max-price" name="max-price" min="5000" placeholder="Do:" required value="10000">
             </fieldset>
 
             <input type="submit" name="action" value="Dalej" class="button">
