@@ -21,7 +21,7 @@ class DecodedUser:
             writer.writerow([row])
 
     def values(self):
-        return self.purpose_str, self.economy, self.comfort, self.min_price, self.max_price
+        return self.purpose_str, self.economy, self.comfort, self.driving_style,self.min_price, self.max_price
 
 
 class User:
