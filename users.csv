@@ -51,3 +51,11 @@ id;przeznaczenie;ekonomia;komfort;styl;min_price;max_price
 50;Rodzinny;0;0;-1;0;10000
 51;Rodzinny;0;0;-1;0;10000
 52;Rodzinny;0;0;-1;0;10000
+53;Rodzinny;1;2;-1;0;30000
+54;Rodzinny;1;2;-1;0;30000
+55;Rodzinny;1;2;-1;0;30000
+56;Sportowy;0;0;0;30000;70000
+57;Sportowy;0;0;0;30000;70000
+58;Miejski;0;0;0;0;10000
+59;Sportowy;0;0;0;30000;75000
+60;Sportowy;0;0;0;30000;75000

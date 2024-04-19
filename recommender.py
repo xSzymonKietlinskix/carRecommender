@@ -12,8 +12,9 @@ def recommend(user):
     if not cars_db_selected.empty:
         cars_db = cars_db_selected
     matching_users = find_similar_users(dec_user)
-    cars_selected = filter_cars(matching_users, cars_db)
-    car_frame = cars_db.sample()
+    car_frame = filter_cars(matching_users, cars_db)
+
+
     selected_columns = ['Brand', 'Generation', 'Model', 'Version', 'Id']
     car_frame_str = car_frame[selected_columns].astype(str)
     car_list = car_frame_str.values.tolist()[0]
@@ -45,7 +46,6 @@ def find_similar_users(dec_user):
 
     distances, indices = knn.kneighbors([user_list])
 
-    # Wyświetlenie wyników
     nearest_neighbors = users.iloc[indices[0]]
     matching_users = check_ratings(nearest_neighbors)
     return matching_users
@@ -59,5 +59,16 @@ def filter_cars(matching_users, cars_db):
     cars_db['accuracy'] = 3
     rating_map = dict(zip(matching_users['car_id'], matching_users['rating']))
     cars_db['accuracy'] = cars_db['Id'].map(rating_map).fillna(cars_db['accuracy'])
-    print(cars_db)
+    cars_db = cars_db.sort_values('accuracy')
 
+    prev_acc = 3.0
+    last_idx = len(cars_db)
+    for index,row in cars_db.iterrows():
+        if row['accuracy'] < prev_acc:
+            last_idx = index
+            break
+        prev_acc = row['accuracy']
+
+    cars_db = cars_db[:last_idx]
+    car_frame = cars_db.sample()
+    return car_frame
