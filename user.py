@@ -1,5 +1,4 @@
 import csv
-import pandas as pd
 
 
 class DecodedUser:
@@ -15,7 +14,7 @@ class DecodedUser:
 
 
     def save_user_rating(self, car_id, rating):
-        with open('users_ratings.csv', 'a', encoding='UTF8', newline='') as f:
+        with open('data/users_ratings.csv', 'a', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
             row = str(self.id_usr) + ';' + str(car_id) + ';' + str(rating)
             writer.writerow([row])
@@ -79,12 +78,11 @@ class User:
                 mapped_przeznaczenie = mapped_przeznaczenie[len(mapped_przeznaczenie) // 2]
                 mapped_przeznaczenie = list(mapped_przeznaczenie)
 
-        with open('users.csv', 'r', encoding='utf-8') as file:
+        with open('data/users.csv', 'r', encoding='utf-8') as file:
             id_usr = sum(1 for line in file)
-            print("Liczba wierszy w pliku:", id_usr)
 
             self.id_usr = id_usr
-            with open('users.csv', 'a', encoding='UTF8', newline='') as f:
+            with open('data/users.csv', 'a', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
                 row = str(id_usr) + ';' + str(self.przeznaczenie) + ';' + str(economy) + ';' + str(comfort) + ';' + str(
                     driving_style) + ';' + str(self.min_price) + ';' + str(self.max_price)

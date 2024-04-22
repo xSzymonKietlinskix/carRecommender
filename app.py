@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, session
 from user import User
 from car import Car
 import recommender
@@ -27,6 +27,7 @@ def form():
         min_price = request.form['min-price']
         max_price = request.form['max-price']
         styl_jazdy = request.form['styl_jazdy']
+        session.pop('rating_submitted', None)
         if request.form['action'] == 'Dalej':
             user = User(przeznaczenie, ekonomia, wygoda, styl_jazdy, min_price, max_price)
             session['user'] = {
@@ -66,11 +67,13 @@ def submit_rating():
     user_data = session.get('user')
     car_data = session.get('car')
     if user_data:
-        user = User(user_data['przeznaczenie'], user_data['ekonomia'], user_data['wygoda'], user_data['styl_jazdy'], user_data['min_price'], user_data['max_price'])
-        car = Car(id = car_data['id'], brand=car_data['brand'], model=car_data['model'], generation=car_data['generation'],
-                  version=car_data['version'])
-        dec_user = user.decode()
-        dec_user.save_user_rating(car.id, rating)
+        if 'rating_submitted' not in session:
+            user = User(user_data['przeznaczenie'], user_data['ekonomia'], user_data['wygoda'], user_data['styl_jazdy'], user_data['min_price'], user_data['max_price'])
+            car = Car(id = car_data['id'], brand=car_data['brand'], model=car_data['model'], generation=car_data['generation'],
+                      version=car_data['version'])
+            dec_user = user.decode()
+            dec_user.save_user_rating(car.id, rating)
+            session['rating_submitted'] = True
     return redirect(url_for('results'))
 
 

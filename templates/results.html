@@ -41,6 +41,11 @@
                 <span><i class="far fa-star"></i></span>
                 <span><i class="far fa-star"></i></span>
             </div>
+            <div id="thank-you-message" style="display: none; margin-top: 10px;">
+                <p>Dziękuję!</p>
+                <p>Potrzebujesz kolejnej rekomendacji?</p>
+                <a href="/">Kliknij tu!</a>
+            </div>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
             $(document).ready(function(){
@@ -52,6 +57,9 @@
                         url: '/submit-rating',
                         type: 'POST',
                         data: { rating: rating },
+                        success: function() {
+                        $('#thank-you-message').show(); // Pokazuję napis "Dziękuję" po udanym przesłaniu oceny
+                    }
                     });
                 });
             }); 

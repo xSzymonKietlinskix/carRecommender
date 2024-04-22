@@ -1,12 +1,11 @@
-from sklearn.metrics import DistanceMetric
+import math
 from sklearn.neighbors import NearestNeighbors
-
-from user import User, DecodedUser
-from car import  Car
+from car import Car
 import pandas as pd
+
 def recommend(user):
     dec_user = user.decode()
-    cars_db = Car.find_cars_segments("car database.csv")
+    cars_db = Car.find_cars_segments("data/car database.csv")
     cars_db = cars_db[(cars_db['Price'] >= dec_user.min_price) & (cars_db['Price'] <= dec_user.max_price)]
     cars_db_selected = cars_db[cars_db['Segment'].isin(dec_user.purpose)]
     if not cars_db_selected.empty:
@@ -34,13 +33,13 @@ def find_similar_users(dec_user):
     user_list = list(dec_user.values())
     user_list[0] = przeznaczenie_dict.get(user_list[0], None)
 
-    users = pd.read_csv("users.csv", sep=';')
+    users = pd.read_csv("data/users.csv", sep=';')
     users['przeznaczenie'] = users['przeznaczenie'].map(przeznaczenie_dict)
     features = ['przeznaczenie', 'ekonomia', 'komfort', 'styl', 'min_price', 'max_price']
 
     # Wybór k najbliższych sąsiadów (użytkowników)
     rows, _ = users.shape
-    k = 3
+    k = math.ceil(rows/3)
     knn = NearestNeighbors(n_neighbors=k, metric='manhattan')
     knn.fit(users[features])
 
@@ -51,24 +50,32 @@ def find_similar_users(dec_user):
     return matching_users
 
 def check_ratings(users):
-    users_ratings = pd.read_csv('users_ratings.csv', sep=';')
+    users_ratings = pd.read_csv('data/users_ratings.csv', sep=';')
     matching_users = users_ratings[users_ratings['user_id'].isin(users['id'])]
     return matching_users
 
 def filter_cars(matching_users, cars_db):
-    cars_db['accuracy'] = 3
+    cars_db['accuracy'] = 3.0
     rating_map = dict(zip(matching_users['car_id'], matching_users['rating']))
-    cars_db['accuracy'] = cars_db['Id'].map(rating_map).fillna(cars_db['accuracy'])
-    cars_db = cars_db.sort_values('accuracy')
+    print("Rating map: ", rating_map)
+    if len(rating_map) != 0:
+        for car_id, ratings in rating_map.items():
+            if type(ratings) == int:
+                continue
+            average_rating = sum(ratings) / len(ratings)
+            rating_map[car_id] = average_rating
 
+    cars_db['accuracy'] = cars_db['Id'].map(rating_map).fillna(cars_db['accuracy'])
+    cars_db_new = cars_db.sort_values('accuracy', ascending=False)
     prev_acc = 3.0
     last_idx = len(cars_db)
-    for index,row in cars_db.iterrows():
-        if row['accuracy'] < prev_acc:
-            last_idx = index
+    counter = 0
+    for index,row in cars_db_new.iterrows():
+        if row['accuracy'] - prev_acc < -0.5:
+            last_idx = counter
             break
         prev_acc = row['accuracy']
-
-    cars_db = cars_db[:last_idx]
-    car_frame = cars_db.sample()
+        counter += 1
+    cars_db_new = cars_db_new[:last_idx]
+    car_frame = cars_db_new.sample()
     return car_frame

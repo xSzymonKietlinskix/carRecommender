@@ -1,9 +1,6 @@
-import csv
-
 import joblib
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
+
 
 
 class Car:
@@ -26,12 +23,12 @@ class Car:
 
 
 
-    def find_cars_segments(file):
-        knn = joblib.load('knn1.pkl')
-        cars_db = pd.read_csv("car database.csv", sep=';')
+    def find_cars_segments(file_name):
+        knn = joblib.load('models/knn1.pkl')
+        cars_db = pd.read_csv(file_name, sep=';')
         cars_to_pred = cars_db.copy()
         cars_to_pred = cars_to_pred.drop(['Id', 'Model', 'Generation', 'Version', 'Height', 'Brand', 'Price'], axis = 1)
-        scaler = joblib.load('knn1_scaler.pkl')
+        scaler = joblib.load('models/knn1_scaler.pkl')
         cars_to_pred = scaler.transform(cars_to_pred)
         prediction = knn.predict(cars_to_pred)
         cars_db = cars_db.assign(Segment=prediction)

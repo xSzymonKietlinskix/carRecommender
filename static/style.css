@@ -15,6 +15,24 @@ body, html {
     font-family: 'Montserrat',sans-serif;
 }
 
+/* Minimum resolution */
+@media (-webkit-device-pixel-ratio: 1) {
+  * {
+    zoom: 1.08;
+  }
+}
+@media (-webkit-device-pixel-ratio: 1.75) {
+  * {
+    zoom: 1.05;
+  }
+}
+
+@media (max-width: 500px) {
+  * {
+    zoom: 0.98;
+  }
+}
+
 body{
     background-image: url('background.svg');
     background-size: cover;
@@ -91,6 +109,10 @@ body{
     & h2 {
         opacity: 100%;
         font-size:0.7em;
+    }
+    & a {
+        text-decoration: none;
+        color: MistyRose
     }
 }
 
