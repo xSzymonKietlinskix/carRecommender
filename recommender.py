@@ -4,11 +4,11 @@ from car import Car
 import pandas as pd
 
 def recommend(user):
-    dec_user = user.decode()
+    dec_user = user.decode(save = True)
     cars_db = Car.find_cars_segments("data/car database.csv")
     cars_db = cars_db[(cars_db['Price'] >= dec_user.min_price) & (cars_db['Price'] <= dec_user.max_price)]
     cars_db_selected = cars_db[cars_db['Segment'].isin(dec_user.purpose)]
-    if not cars_db_selected.empty:
+    if not cars_db_selected.empty and len(cars_db_selected) > 3:
         cars_db = cars_db_selected
     matching_users = find_similar_users(dec_user)
     car_frame = filter_cars(matching_users, cars_db)
@@ -70,12 +70,14 @@ def filter_cars(matching_users, cars_db):
     prev_acc = 3.0
     last_idx = len(cars_db)
     counter = 0
-    for index,row in cars_db_new.iterrows():
-        if row['accuracy'] - prev_acc < -0.5:
-            last_idx = counter
-            break
-        prev_acc = row['accuracy']
-        counter += 1
+    if len(matching_users) % 10 != 0:
+        for index, row in cars_db_new.iterrows():
+            if row['accuracy'] - prev_acc < -0.5:
+                if counter > 5:
+                    last_idx = counter
+                    break
+            prev_acc = row['accuracy']
+            counter += 1
     cars_db_new = cars_db_new[:last_idx]
     car_frame = cars_db_new.sample()
     return car_frame

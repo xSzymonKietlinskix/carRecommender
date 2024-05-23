@@ -33,7 +33,7 @@ class User:
         self.przeznaczenie = przeznaczenie
 
 
-    def decode(self):
+    def decode(self, save = False):
         przeznaczenie_dict = {
             'Rodzinny': ['D', 'E', 'K'],
             'Miejski': ['A', 'B', 'C'],
@@ -78,10 +78,12 @@ class User:
                 mapped_przeznaczenie = mapped_przeznaczenie[len(mapped_przeznaczenie) // 2]
                 mapped_przeznaczenie = list(mapped_przeznaczenie)
 
+
         with open('data/users.csv', 'r', encoding='utf-8') as file:
             id_usr = sum(1 for line in file)
-
             self.id_usr = id_usr
+
+        if save is True:
             with open('data/users.csv', 'a', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
                 row = str(id_usr) + ';' + str(self.przeznaczenie) + ';' + str(economy) + ';' + str(comfort) + ';' + str(

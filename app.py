@@ -3,10 +3,19 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from user import User
 from car import Car
 import recommender
+import time
+import csv
+from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
+
+def save_log(fileName, variable):
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(fileName, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([current_datetime, variable])
 
 @app.route('/')
 def homepage():
@@ -38,7 +47,11 @@ def form():
                 'min_price': min_price,
                 'max_price': max_price
             }
+            start_time = time.time()
             car = recommender.recommend(user)
+            end_time = time.time()
+            execution_time = end_time - start_time
+            save_log("debug/excTime.csv", execution_time)
             session['car'] = {
                 'brand': car.brand,
                 'model': car.model,
