@@ -86,7 +86,7 @@ class User:
         if save is True:
             with open('data/users.csv', 'a', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
-                row = str(id_usr) + ';' + str(self.przeznaczenie) + ';' + str(economy) + ';' + str(comfort) + ';' + str(
+                row = str(id_usr+1) + ';' + str(self.przeznaczenie) + ';' + str(economy) + ';' + str(comfort) + ';' + str(
                     driving_style) + ';' + str(self.min_price) + ';' + str(self.max_price)
                 writer.writerow([row])
 
